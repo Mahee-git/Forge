@@ -12,7 +12,7 @@ export const swap = p => history.replaceState({}, '', BASE + p);
 export const DEF = {ex: [{id: 'pushups', name: 'Push-ups', unit: 'reps', target: 50}, {id: 'pullups', name: 'Pull-ups', unit: 'reps', target: 15}, {id: 'situps', name: 'Sit-ups', unit: 'reps', target: 60}], nut: {kcal: 2400, p: 140, c: 250, f: 70}};
 export const ex = () => S.profile?.exercises || DEF.ex;
 export const nut = () => S.profile?.nut || DEF.nut;
-const E = () => ({counts: {}, meals: [], burn: 0});
+const E = () => ({counts: {}, meals: [], burn: 0, waterMl: 0});
 export const get = k => S.days[k] || E();
 export const mut = k => (S.days[k] ||= E(), S.days[k].counts ||= {}, S.days[k].meals ||= [], S.days[k]);
 export const cnt = (d, id) => d?.counts?.[id] || 0;
