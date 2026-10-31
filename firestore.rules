@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function signedIn() { return request.auth != null; }
+    // Admin = a document exists at admins/<your uid> (create it by hand in the console), or the admin custom claim.
+    function isAdmin() { return signedIn() && (request.auth.token.admin == true || exists(/databases/$(db)/documents/admins/$(request.auth.uid))); }
+
+    match /users/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+      match /{sub=**} { allow read, write: if signedIn() && request.auth.uid == uid; }
+    }
+    match /posts/{slug} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow write: if isAdmin();
+    }
+    // Users may only check whether THEY are admin. Nobody can write here from the app.
+    match /admins/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+  }
+}
