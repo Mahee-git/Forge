@@ -6,10 +6,11 @@ import {watch} from './auth.js';
 import * as D from './db.js';
 import {dashboard, activity} from './views/dash.js';
 import {nutrition} from './views/nutrition.js';
+import {hydration} from './views/hydration.js';
 import {progress} from './views/progress.js';
 import {blogList, article, admin} from './views/blog.js';
 import {account, authView} from './views/account.js';
-const NAV = [['/dashboard', 'Dashboard'], ['/activity', 'Activity'], ['/nutrition', 'Nutrition'], ['/progress', 'Progress'], ['/blog', 'Blog'], ['/account', 'Account']];
+const NAV = [['/dashboard', 'Dashboard'], ['/activity', 'Activity'], ['/nutrition', 'Nutrition'], ['/hydration', 'Hydration'], ['/progress', 'Progress'], ['/blog', 'Blog'], ['/account', 'Account']];
 const gate = '<h1>Sign in to track</h1><p class="mut">Your records are private and saved to your account.</p><a class="b g" href="/account">Sign in or register</a>';
 const landing = () => '<h1>Forge</h1><p class="mut" style="font-size:18px">A quiet place to build the habit — workouts, nutrition and progress in one calm tracker.</p><a class="b g" href="/account">Start tracking</a><a class="b" href="/blog">Read the blog</a>';
 async function view(p) {
@@ -22,7 +23,7 @@ async function view(p) {
   if (p === '/account') return S.user ? account() : authView();
   if (!S.user) return gate;
   if (p === '/admin') return admin();
-  return ({'/dashboard': dashboard, '/activity': activity, '/nutrition': nutrition, '/progress': progress}[p] || (() => '<h1>Page not found</h1>'))();
+  return ({'/dashboard': dashboard, '/activity': activity, '/nutrition': nutrition, '/hydration': hydration, '/progress': progress}[p] || (() => '<h1>Page not found</h1>'))();
 }
 let rid = 0;
 hooks.render = async () => {
