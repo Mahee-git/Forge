@@ -21,7 +21,7 @@ export const tot = d => (d?.meals || []).reduce((a, m) => ({k: a.k + m.k, p: a.p
 export const score = k => { if (k > key()) return 0; const d = S.days[k]; if (!d) return 0; const e = ex(); const w = e.reduce((a, x) => a + Math.min(1, cnt(d, x.id) / x.target), 0) / (e.length || 1); return .7 * w + .3 * Math.min(1, tot(d).p / nut().p); };
 export const lvl = s => s === 0 ? 0 : s < .25 ? 1 : s < .5 ? 2 : s < .8 ? 3 : 4;
 export const reps = d => ex().filter(e => e.unit === 'reps').reduce((a, e) => a + cnt(d, e.id), 0);
-export const setTheme = t => { document.documentElement.dataset.theme = t === 'dark' ? 'dark' : 'light'; };
+export const setTheme = t => { document.documentElement.dataset.theme = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; };
 // Weight used for calorie estimates: latest logged weight, else a 70 kg default.
 export const kg = () => { const w = S.weights.at(-1); return w ? {kg: w.kg, src: `your latest logged weight (${w.kg} kg)`, assumed: false} : {kg: 70, src: 'a 70 kg default', assumed: true}; };
 export const burn = d => { const w = kg().kg; return Math.round(ex().reduce((a, e) => a + cnt(d, e.id) * kpu(e, w), 0)); };
