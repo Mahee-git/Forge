@@ -33,7 +33,7 @@ export function progress() {
 ${bmiCard()}
 <div class="card"><h3>Weekly reps</h3><small>Last 8 weeks (reps-based exercises)</small>${bars(wk.map(x => x[1]), wk.map(x => x[0]), 'Weekly reps')}</div>
 <div class="card"><h3>This month</h3><p>${mk.filter(k => score(k) > 0).length} active days · ${mk.reduce((a, k) => a + reps(S.days[k]), 0)} reps</p></div>
-<div class="card"><h3>Exercise progression</h3><label>Exercise<select data-c="pex">${ex().map(e => `<option value="${e.id}" ${e.id === pe.id ? 'selected' : ''}>${esc(e.name)}</option>`).join('')}</select></label>${bars(d30.map(k => cnt(get(k), pe.id)), d30.map(lab), pe.name + ' per day')}<small>Last 30 days · daily count</small></div>
+<div class="card"><h3>Exercise progression</h3>${pe ? `<label>Exercise<select data-c="pex">${ex().map(e => `<option value="${e.id}" ${e.id === pe.id ? 'selected' : ''}>${esc(e.name)}</option>`).join('')}</select></label>${bars(d30.map(k => cnt(get(k), pe.id)), d30.map(lab), pe.name + ' per day')}<small>Last 30 days · daily count</small>` : '<p class="mut">Add a workout to track its progress.</p>'}</div>
 <div class="card"><h3>Calories</h3>${bars(d14.map(k => tot(get(k)).k), d14.map(lab), 'Calories per day')}<small>Last 14 days</small></div>
 <div class="card"><h3>Weight history</h3>${spark(w.map(x => x.kg))}${S.weights.slice(-6).reverse().map(x => `<div class="m"><span>${x.date}</span><span>${x.kg} kg <button class="lnk danger" data-a="delw" data-k="${x.date}" aria-label="Delete weight entry">✕</button></span></div>`).join('') || '<p class="mut">No entries yet.</p>'}</div>`;
 }
