@@ -34,6 +34,12 @@ Assumes your GitHub repository is named **forge** (any name works; see Troublesh
 ## Local run (optional)
 `npm install` then `npm run dev` (opens at http://localhost:5173/).
 
+## Forge features
+- Daily food minus logged activity calories, with remaining protein, carbohydrate and fat targets.
+- Separate workout targets and duration-based movement/sports logs. Activity rates use MET values from the 2024 Adult Compendium and your saved body weight.
+- Timestamped water entries and a hydration target you can set separately for each date.
+- Consistency colours distinguish workout completion, above-target workouts, and movement-only days.
+
 ## Notes
 - Calories, BMI and targets are estimates, not medical advice.
 - GitHub Pages serves deep links through `404.html`. That works for visitors but is weaker for search engines than Firebase Hosting or Netlify.
