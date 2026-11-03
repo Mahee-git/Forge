@@ -1,6 +1,6 @@
 // All Firestore access lives here. Schema:
 // users/{uid}                    profile: {displayName, theme, exercises:[{id,name,unit,target}], nut:{kcal,p,c,f}}
-// users/{uid}/days/{YYYY-MM-DD}  {counts:{exerciseId:n}, meals:[{id,meal,name,qty,unit,k,p,c,f}], burn}
+// users/{uid}/days/{YYYY-MM-DD}  {counts:{exerciseId:n}, activities:[...], meals:[...], waterMl, waterLogs:[...], waterGoalMl}
 // users/{uid}/foods/{id}         saved foods   | users/{uid}/weights/{YYYY-MM-DD} {kg}
 // posts/{slug}                   blog posts (status: draft|published)
 import {db} from './firebase.js';
